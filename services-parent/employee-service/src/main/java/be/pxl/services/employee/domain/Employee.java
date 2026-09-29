@@ -19,6 +19,10 @@ public class Employee {
     private Long departmentId;
     private Long organizationId;
 
+    public Employee(){
+
+    }
+
     public Employee(String firstName, String lastName, String email, Long departmentId, Long organizationId){
         this.firstName = firstName;
         this.lastName = lastName;
