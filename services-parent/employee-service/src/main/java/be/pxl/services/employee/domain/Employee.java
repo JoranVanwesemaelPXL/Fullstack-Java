@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Employee {
@@ -13,21 +12,18 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String firstName;
-    @NotBlank
     private String lastName;
-    @NotBlank
     private String email;
 
     private Long departmentId;
     private Long organizationId;
 
-    public Employee(){
-
+    public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String email, Long departmentId, Long organizationId){
+    public Employee(String firstName, String lastName, String email,
+                    Long departmentId, Long organizationId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
