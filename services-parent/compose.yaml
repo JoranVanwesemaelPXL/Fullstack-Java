@@ -1,0 +1,56 @@
+services:
+  employee-db:
+    image: mysql:8.4
+    container_name: employee-db
+    environment:
+      MYSQL_ROOT_PASSWORD: devrootpassword
+      MYSQL_DATABASE: employeeservice_db
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - employee-data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pdevrootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  department-db:
+    image: mysql:8.4
+    container_name: department-db
+    environment:
+      MYSQL_ROOT_PASSWORD: devrootpassword
+      MYSQL_DATABASE: departmentservice_db
+    ports:
+      - "127.0.0.1:3308:3306"
+    volumes:
+      - department-data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pdevrootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  organization-db:
+    image: mysql:8.4
+    container_name: organization-db
+    environment:
+      MYSQL_ROOT_PASSWORD: devrootpassword
+      MYSQL_DATABASE: organizationservice_db
+    ports:
+      - "127.0.0.1:3309:3306"
+    volumes:
+      - organization-data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pdevrootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  employee-data:
+  department-data:
+  organization-data:
