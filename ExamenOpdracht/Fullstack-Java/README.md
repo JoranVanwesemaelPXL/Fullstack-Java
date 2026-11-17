@@ -18,25 +18,9 @@ examenopdracht/
 
 ## 1. Architectuurschets
 
-Het diagram staat als code in [`architectuur/workspace.dsl`](architectuur/workspace.dsl) (Structurizr DSL). Het bevat vier views:
+Het diagram staat als code in [`architectuur/workspace.dsl`](./architectuur/workspace.dsl) 
 
-| View | Wat je ziet |
-|---|---|
-| `Architectuur-volledig` | Alle containers, inclusief discovery en config |
-| `Architectuur-functioneel` | Zonder discovery en config: wie praat functioneel met wie |
-| `US2-bestellen` | Dynamic view van de belangrijkste flow |
-| `US5-leveren` | Dynamic view van de afwerking van een leverronde |
-
-**Bekijken met Structurizr Lite** (poort 8089, want 8080 is voor de gateway):
-
-```bash
-docker run -it --rm -p 8089:8080 -v "$(pwd)/architectuur:/usr/local/structurizr" structurizr/lite
-# open http://localhost:8089
-```
-
-Exporteer de views als PNG vanuit de Lite-interface (Export > PNG) en zet ze in `architectuur/img/`, zodat ze ook zonder Docker leesbaar zijn:
-
-![Functioneel overzicht](architectuur/img/Architectuur-functioneel.png)
+![Functioneel overzicht](./architectuur/img/Architectuur-functioneel.svg)
 
 **Legende**
 
