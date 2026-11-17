@@ -1,0 +1,54 @@
+Doel
+WAT WE VERWACHTEN
+We hechten belang aan kwaliteitsvolle code
+— volgens de regels van de kunst — unit testen, coverage
+— volgens de geziene principes uit de les — microservices, frontend
+— hanteer code conventies
+Wat je krijgt
+— user stories per probleemdomein
+— technische vereisten die er zeker in moeten zitten
+Wat je zelf invult: hoe je het oplost, en wat je eraan toevoegt.
+De opdracht
+DE OPDRACHT
+Maaltijdboxen aan huis
+Omschrijving
+HET DOMEIN
+Een bedrijf levert wekelijks maaltijdboxen aan huis. Klanten kiezen uit het weekmenu een
+aantal recepten voor een aantal personen, en bestellen die als één box.
+Achter die ene knop zit meer dan je denkt:
+— het WEEKMENU bepaalt wat er te kiezen valt
+— de VOORRAAD bepaalt of het ook echt kan — twintig keer dezelfde risotto is twintig keer
+arborio
+— de KLANT wil weten wat er met zijn bestelling gebeurt
+Sommige van die vragen hebben meteen een antwoord nodig. Andere kunnen wachten.
+Dat onderscheid maken is de kern van deze opdracht.
+Bounded contexts
+HET PLATFORM BESTAAT UIT
+1. RecipeService
+Het weekmenu: recepten met bereidingstijd, aantal personen, allergenen en de ingrediënten die erbij
+horen.
+2. OrderService
+De bestelling: welke klant, welke recepten, hoeveel personen, welke status.
+3. InventoryService
+De voorraad per ingrediënt. Reserveert bij een bevestigde bestelling.
+4. DeliveryService
+Leverrondes met tijdsloten en een beperkt aantal plaatsen per slot.
+5. NotificationService
+Verstuurt meldingen. Bewaart niets — loggen volstaat, echte mail hoeft niet.
+RecipeService
+USER STORIES
+1. US1: Als klant wil ik het weekmenu zien met bereidingstijd, aantal personen en
+allergenen, zodat ik kan kiezen wat ik wil koken.
+Daarnaast moet een medewerker recepten kunnen toevoegen en aanpassen, met per recept de
+ingrediënten en hoeveelheden — zonder die kan je niet berekenen wat een bestelling uit de voorraad
+haalt.
+OrderService
+USER STORIES
+1. US2: Als klant wil ik een box samenstellen met een aantal recepten en een aantal
+personen, een leverslot kiezen en bestellen. Is er onvoldoende voorraad of zit het slot
+vol, dan hoor ik dat meteen — niet pas achteraf.
+2. US3: Als klant wil ik mijn bestellingen kunnen opvolgen met hun status (PLACED,
+CONFIRMED, IN_DELIVERY, DELIVERED of CANCELLED).
+3. US6: Als klant wil ik een bestelling kunnen annuleren zolang ze nog niet onderweg is,
+zodat mijn ingrediënten vrijkomen.
+US4 en US5 staan bij InventoryService en DeliveryService.
