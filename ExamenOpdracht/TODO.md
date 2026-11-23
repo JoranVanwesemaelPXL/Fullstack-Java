@@ -106,8 +106,13 @@ Spring Boot 4.0.8 · Spring Cloud 2025.1.3 · Java 21 · eigen GitHub-repo, rege
 ## Week 9 – De services (US1 + US4 werken) 🔴 ← **nu**
 - [x] Multi-module `pom.xml` in de root (groupId `be.foodexpress`)
 - [x] `docker-compose.yml` met 4 PostgreSQL-databases (poorten 5433–5436)
-- [ ] 5 modules genereren in IntelliJ (Spring Initializr)
-- [ ] `recipe-service` – Recipe, Ingredient – eigen DB – **US1**: `GET /api/recipes`
+- [x] 5 modules genereren in IntelliJ (Spring Initializr)
+- [x] Spring Boot-versie overal op **4.0.8** gezet (IntelliJ koos 4.2.0)
+- [x] `application.properties` per service (poort + eigen DB)
+- [x] `recipe-service` – Recipe, Ingredient, RecipeIngredient – CRUD + **US1**: `GET /api/recipes?week=` 🔴 *testen: `mvn test` + opstarten*
+- [x] recipe-service: DTO's + mapper, `GlobalExceptionHandler` + `ApiError`, rolcheck `X-Role`, DemoDataSeeder
+- [x] recipe-service: tests (RecipeTest, WeeksTest, RecipeApiTests met Testcontainers)
+- [ ] Frontend `environment.development.ts` tijdelijk naar `http://localhost:8081/api` om US1 tegen de echte recipe-service te testen (CORS nodig → of via mock blijven tot de gateway)
 - [ ] `order-service` – Order, OrderLine (+ status-enum)
 - [ ] `inventory-service` – StockItem – **US4**: lage voorraad + aanvullen
 - [ ] `delivery-service` – DeliverySlot, DeliveryRun
