@@ -3,6 +3,9 @@
 Vink af met `[x]` zodra iets af én getest is.
 Legende: 🔴 dringend · 🟡 deze/volgende week · ⚪ later/extra
 
+**Laatste update:** 23/11/2026 · **Stand:** US1 werkt in frontend (tegen mock) én backend (recipe-service, `mvn test` groen).
+**Volgende stap:** inventory-service (US4), daarna order-, delivery- en notification-service.
+
 ---
 
 ## 📅 Deadlines
@@ -49,7 +52,7 @@ Legende: 🔴 dringend · 🟡 deze/volgende week · ⚪ later/extra
 ## Basis / infrastructuur
 - [x] `environments/` (`environment.ts` + `environment.development.ts`) + `fileReplacements` in `angular.json`
 - [x] `provideHttpClient(withInterceptors([authInterceptor]))` in `app.config.ts`
-- [ ] `npm install @ngrx/signals` uitvoeren 🔴
+- [x] `npm install @ngrx/signals` uitvoeren
 - [x] Mock-backend (`npm run mock`, poort 3000) – US1 endpoints
 - [ ] Mock-backend uitbreiden voor US2, US3, US6
 - [x] Modellen: `Recipe`, `User/Role`, `ApiError`
@@ -68,7 +71,7 @@ Legende: 🔴 dringend · 🟡 deze/volgende week · ⚪ later/extra
 
 ## User stories – Deel 1 (klant)
 - [x] **US1 – Weekmenu**: `RecipeService` + `RecipeStore` (SignalStore) + menupagina
-      (kaarten met bereidingstijd, personen, allergenen, ingrediënten; allergenenfilter; laad-/fout-/leegstatus) 🔴 *testen tegen mock*
+      (kaarten met bereidingstijd, personen, allergenen, ingrediënten; allergenenfilter; laad-/fout-/leegstatus) ✅ getest tegen mock
 - [ ] **US2 – Box bestellen**: `DeliverySlotService`/`OrderService` + stores; recepten + personen + slot kiezen; `POST /orders`; 409 meteen tonen
 - [ ] **US3 – Mijn bestellingen**: lijst met statusbadge (PLACED, CONFIRMED, IN_DELIVERY, DELIVERED, CANCELLED)
 - [ ] **US6 – Annuleren**: knop enkel bij PLACED/CONFIRMED; store bijwerken na annuleren
@@ -109,23 +112,25 @@ Spring Boot 4.0.8 · Spring Cloud 2025.1.3 · Java 21 · eigen GitHub-repo, rege
 - [x] 5 modules genereren in IntelliJ (Spring Initializr)
 - [x] Spring Boot-versie overal op **4.0.8** gezet (IntelliJ koos 4.2.0)
 - [x] `application.properties` per service (poort + eigen DB)
-- [x] `recipe-service` – Recipe, Ingredient, RecipeIngredient – CRUD + **US1**: `GET /api/recipes?week=` 🔴 *testen: `mvn test` + opstarten*
+- [x] `recipe-service` – Recipe, Ingredient, RecipeIngredient – CRUD + **US1**: `GET /api/recipes?week=` ✅ getest
 - [x] recipe-service: DTO's + mapper, `GlobalExceptionHandler` + `ApiError`, rolcheck `X-Role`, DemoDataSeeder
 - [x] recipe-service: tests (RecipeTest, WeeksTest, RecipeApiTests met Testcontainers)
-- [ ] Frontend `environment.development.ts` tijdelijk naar `http://localhost:8081/api` om US1 tegen de echte recipe-service te testen (CORS nodig → of via mock blijven tot de gateway)
+- [ ] ⚪ (optioneel) Frontend `environment.development.ts` tijdelijk naar `http://localhost:8081/api` om US1 tegen de echte recipe-service te testen (CORS nodig → of via mock blijven tot de gateway)
+- [ ] `inventory-service` – StockItem – **US4**: lage voorraad + aanvullen 🔴 ← **volgende**
 - [ ] `order-service` – Order, OrderLine (+ status-enum)
-- [ ] `inventory-service` – StockItem – **US4**: lage voorraad + aanvullen
 - [ ] `delivery-service` – DeliverySlot, DeliveryRun
 - [ ] `notification-service` – geen DB, enkel loggen
-- [ ] CRUD per service met **DTO's** (geen entities over de lijn) + mappers
-- [ ] `@RestControllerAdvice` met vast foutobject + statuscodes (201/200/404/400/409)
-- [ ] `X-User`/`X-Role` header uitlezen
-- [ ] Seed-data (bv. `data.sql`) zodat het weekmenu niet leeg is
-- [ ] `BESLISSINGEN.md` bijwerken
+- [ ] CRUD per service met **DTO's** (geen entities over de lijn) + mappers — ✅ recipe · ☐ inventory · ☐ order · ☐ delivery
+- [ ] `@RestControllerAdvice` met vast foutobject + statuscodes (201/200/404/400/409) — ✅ recipe · ☐ inventory · ☐ order · ☐ delivery · ☐ notification
+- [ ] `X-User`/`X-Role` header uitlezen — ✅ recipe · ☐ inventory · ☐ order · ☐ delivery
+- [x] Seed-data zodat het weekmenu niet leeg is (DemoDataSeeder, altijd voor de huidige week)
+- [ ] Seed-data voorraad (inventory) en leverslots (delivery), met dezelfde `ingredientId`'s (1–21)
+- [x] `BESLISSINGEN.md` bijgewerkt (week 9, recipe-service)
+- [ ] Commit + push na elke service (je commits zijn materiaal voor de verdediging)
 
 ## Week 10 – Testen & contract
-- [ ] Testklassen per service, Testcontainers in pom, nergens `@Disabled`
-- [ ] `mvn test` groen
+- [ ] Testklassen per service, Testcontainers in pom, nergens `@Disabled` — ✅ recipe · ☐ inventory · ☐ order · ☐ delivery · ☐ notification
+- [ ] `mvn test` groen (vanuit de root, alle services) — ✅ recipe-service
 - [ ] `openapi.yaml` in de root (bevroren)
 - [ ] git tag `week10-spec`
 

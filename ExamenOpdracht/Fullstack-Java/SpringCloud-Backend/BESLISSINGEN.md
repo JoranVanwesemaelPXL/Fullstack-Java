@@ -24,4 +24,7 @@ Per week drie tot vijf regels: wat ik gedaan heb, wat nog openstaat, en welke ke
 - **Keuze – allergenen op het ingrediënt:** een recept *berekent* zijn allergenen uit zijn ingrediënten. Zo kan een recept nooit een allergeen "vergeten" als je een ingrediënt toevoegt.
 - **Keuze – Ingredient is een catalogus met vaste id's:** inventory-service gebruikt hetzelfde `ingredientId` als sleutel voor de voorraad, zonder de tabellen van recipe-service te delen.
 - **Keuze – schrijven enkel als MEDEWERKER:** de rol komt uit de header `X-Role`; een andere rol krijgt 403.
-- **Open:** order-, inventory- en delivery-service (CRUD), US4.
+- **Getest (23/11):** `mvn test` is groen voor recipe-service; `GET http://localhost:8081/api/recipes` geeft het weekmenu. De frontend toont US1 al tegen de mock-backend met hetzelfde contract.
+- **Keuze – integratietest via echte HTTP + Testcontainers:** `RecipeApiTests` start de service op een willekeurige poort met een echte PostgreSQL. Zo test ik statuscodes en JSON precies zoals de frontend ze ziet, niet enkel de Java-methodes.
+- **Keuze – demodata voor de huidige week:** de seeder maakt bij het opstarten een menu voor de huidige ISO-week als dat nog niet bestaat. Zo is het menu nooit leeg, ook niet als ik het project een week later opnieuw start.
+- **Open:** inventory-service (US4) als volgende, daarna order-, delivery- en notification-service (CRUD).
