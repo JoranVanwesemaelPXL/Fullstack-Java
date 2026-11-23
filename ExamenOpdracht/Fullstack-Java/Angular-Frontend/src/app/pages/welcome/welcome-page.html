@@ -55,11 +55,24 @@
 
         </div>
 
-      <!-- LOGIN -->
-      <a routerLink="/login"
-         class="rounded-full bg-[#E97832] px-6 py-3 text-sm font-bold text-white shadow-md shadow-orange-200 transition hover:-translate-y-0.5 hover:bg-[#C85B22]">
-        Inloggen
-      </a>
+      <!-- LOGIN / LOGOUT -->
+      @if (auth.user(); as user) {
+        <div class="flex items-center gap-4">
+          <span class="text-sm text-[#78665B]">
+            Hoi <strong class="text-[#2B1D14]">{{ user.username }}</strong>
+            <span class="ml-1 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-bold text-[#E97832]">{{ user.role }}</span>
+          </span>
+          <button type="button" (click)="logout()"
+            class="rounded-full border border-[#E97832] px-6 py-3 text-sm font-bold text-[#E97832] transition hover:bg-orange-50">
+            Uitloggen
+          </button>
+        </div>
+      } @else {
+        <a routerLink="/login"
+           class="rounded-full bg-[#E97832] px-6 py-3 text-sm font-bold text-white shadow-md shadow-orange-200 transition hover:-translate-y-0.5 hover:bg-[#C85B22]">
+          Inloggen
+        </a>
+      }
     </nav>
   </header>
 
@@ -125,7 +138,6 @@
 
         <div class="relative overflow-hidden rounded-[2rem] shadow-2xl">
           <img
-            /* src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85" */
             src="https://images.openai.com/static-rsc-4/CdQ83yifvD4kOT4x0ax5hF1gQEYvnV1Cwpap3CBHXw92HBLL_FOKatmgs6le0z6vzy-wdvuAG9h_sfSmxtxc1Tq1dWLiadF-9dcqY4LtwkNHnhtXJv3_syB21tVjvQiCuC6dd9yI6iGmOk0fFwOo4fP9X0cw5me1IFeatDYnUx_tEU-kaXnOCyh8YEEVsObE?purpose=fullsize"
             alt="Verse en gezonde maaltijd met groenten"
             class="h-[420px] w-full object-cover md:h-[540px]"

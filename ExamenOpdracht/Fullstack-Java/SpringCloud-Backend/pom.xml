@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Root (aggregator) pom van de maaltijdboxen-backend.
+  Elke service heeft zijn eigen pom met spring-boot-starter-parent als parent;
+  deze pom bundelt enkel de modules, zodat `mvn test` / `mvn package` vanuit
+  deze map alle services in één keer bouwt en test.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>be.foodexpress</groupId>
+    <artifactId>mealbox-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>mealbox-backend</name>
+    <description>Spring Cloud-backend voor de maaltijdboxen-case</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <!-- Week 9: de vijf domeinservices -->
+        <module>recipe-service</module>
+        <module>order-service</module>
+        <module>inventory-service</module>
+        <module>delivery-service</module>
+        <module>notification-service</module>
+
+        <!-- Week 11 -->
+        <!-- <module>discovery-service</module> -->
+
+        <!-- Week 12 -->
+        <!-- <module>config-service</module> -->
+        <!-- <module>api-gateway</module> -->
+    </modules>
+</project>

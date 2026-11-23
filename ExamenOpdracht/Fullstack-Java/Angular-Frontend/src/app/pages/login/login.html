@@ -9,20 +9,34 @@
 
     <h2 class="mb-6 text-xl font-bold">Inloggen</h2>
 
-    <form class="space-y-4">
+    <form class="space-y-4" [formGroup]="form" (ngSubmit)="submit()">
       <div>
-        <label class="mb-2 block text-sm font-semibold">E-mailadres</label>
-        <input type="email" placeholder="jouw@email.be"
+        <label for="username" class="mb-2 block text-sm font-semibold">Gebruikersnaam</label>
+        <input id="username" type="text" formControlName="username" placeholder="bv. jan"
+          autocomplete="username"
           class="w-full rounded-xl border border-orange-100 p-3 outline-none focus:border-[#E97832]">
+        @if (form.controls.username.touched && form.controls.username.invalid) {
+          <p class="mt-1 text-sm text-red-600">Vul een naam in van minstens 2 tekens.</p>
+        }
       </div>
 
-      <div>
-        <label class="mb-2 block text-sm font-semibold">Wachtwoord</label>
-        <input type="password" placeholder="Wachtwoord"
-          class="w-full rounded-xl border border-orange-100 p-3 outline-none focus:border-[#E97832]">
-      </div>
+      <fieldset>
+        <legend class="mb-2 block text-sm font-semibold">Ik ben een</legend>
+        <div class="grid grid-cols-3 gap-2">
+          @for (role of roles; track role) {
+            <label
+              class="cursor-pointer rounded-xl border p-3 text-center text-sm font-semibold transition"
+              [class]="form.controls.role.value === role
+                ? 'border-[#E97832] bg-orange-50 text-[#E97832]'
+                : 'border-orange-100 hover:border-orange-200'">
+              <input type="radio" class="sr-only" formControlName="role" [value]="role">
+              {{ roleLabels[role] }}
+            </label>
+          }
+        </div>
+      </fieldset>
 
-      <button type="button"
+      <button type="submit"
         class="w-full rounded-xl bg-[#E97832] p-3 font-bold text-white hover:bg-[#C85B22]">
         Inloggen
       </button>

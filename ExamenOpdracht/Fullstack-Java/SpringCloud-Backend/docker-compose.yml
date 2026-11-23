@@ -1,0 +1,78 @@
+# Week 9: enkel de databases (één PostgreSQL per service, geen gedeelde tabellen).
+# Starten:  docker compose up -d      Stoppen:  docker compose down
+# In week 13 komt RabbitMQ (+ Zipkin) erbij, in week 14 alle services zelf.
+
+services:
+  recipe-db:
+    image: postgres:17-alpine
+    container_name: recipe-db
+    environment:
+      POSTGRES_DB: recipe_db
+      POSTGRES_USER: mealbox
+      POSTGRES_PASSWORD: mealbox
+    ports:
+      - "5433:5432"
+    volumes:
+      - recipe-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealbox -d recipe_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  order-db:
+    image: postgres:17-alpine
+    container_name: order-db
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: mealbox
+      POSTGRES_PASSWORD: mealbox
+    ports:
+      - "5434:5432"
+    volumes:
+      - order-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealbox -d order_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  inventory-db:
+    image: postgres:17-alpine
+    container_name: inventory-db
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: mealbox
+      POSTGRES_PASSWORD: mealbox
+    ports:
+      - "5435:5432"
+    volumes:
+      - inventory-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealbox -d inventory_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  delivery-db:
+    image: postgres:17-alpine
+    container_name: delivery-db
+    environment:
+      POSTGRES_DB: delivery_db
+      POSTGRES_USER: mealbox
+      POSTGRES_PASSWORD: mealbox
+    ports:
+      - "5436:5432"
+    volumes:
+      - delivery-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealbox -d delivery_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  recipe-data:
+  order-data:
+  inventory-data:
+  delivery-data:

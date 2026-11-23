@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-welcome-page',
-  standalone: true,
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './welcome-page.html'
+  templateUrl: './welcome-page.html',
 })
 export class WelcomePage {
+  protected readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
 
+  protected logout(): void {
+    this.auth.logout();
+    this.router.navigateByUrl('/welcome');
+  }
 }
